@@ -14,6 +14,21 @@ import { OtpCleanupService } from './otp-cleanup/otp-cleanup.service';
 import { UserProfileModule } from '../setting/userprofile/userprofile.module';
 import { CompanyDetailsModule } from '../setting/company-details/company-details.module'; //
 
+// Conditionally include GoogleStrategy only if env is configured
+const googleProviders = [] as any[];
+if (
+  process.env.GOOGLE_CLIENT_ID &&
+  process.env.GOOGLE_CLIENT_SECRET &&
+  process.env.GOOGLE_CALLBACK_URL
+) {
+  googleProviders.push(GoogleStrategy);
+} else {
+  // eslint-disable-next-line no-console
+  console.warn(
+    '[AuthModule] Google OAuth is disabled: missing GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET/GOOGLE_CALLBACK_URL',
+  );
+}
+
 @Module({
   imports: [
     ConfigModule,
@@ -30,6 +45,6 @@ import { CompanyDetailsModule } from '../setting/company-details/company-details
     CompanyDetailsModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, GoogleStrategy, JwtStrategy, OtpCleanupService],
+  providers: [AuthService, JwtStrategy, OtpCleanupService, ...googleProviders],
 })
 export class AuthModule {}

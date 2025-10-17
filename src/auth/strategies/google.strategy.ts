@@ -6,10 +6,21 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(configService: ConfigService) {
+    const clientID = configService.get<string>('GOOGLE_CLIENT_ID');
+    const clientSecret = configService.get<string>('GOOGLE_CLIENT_SECRET');
+    const callbackURL = configService.get<string>('GOOGLE_CALLBACK_URL');
+
+    if (!clientID || !clientSecret || !callbackURL) {
+      // When AuthModule is configured to include this provider, enforce proper env configuration
+      throw new Error(
+        'GoogleStrategy is enabled but GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET/GOOGLE_CALLBACK_URL are not set',
+      );
+    }
+
     const options: StrategyOptions = {
-      clientID: configService.get<string>('GOOGLE_CLIENT_ID', ''),
-      clientSecret: configService.get<string>('GOOGLE_CLIENT_SECRET', ''),
-      callbackURL: configService.get<string>('GOOGLE_CALLBACK_URL', ''),
+      clientID,
+      clientSecret,
+      callbackURL,
       scope: ['email', 'profile'],
     };
 
