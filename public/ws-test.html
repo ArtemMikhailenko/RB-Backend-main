@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head><meta charset="utf-8"><title>WS Test</title></head>
+  <body>
+    <h3>Socket Test</h3>
+    <pre id="log"></pre>
+
+    <!-- Socket.IO client -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script>
+      const log = (m) => document.getElementById('log').textContent += m + '\n';
+
+      // Your Nest backend URL/port
+      const socket = io('http://localhost:3000', {
+        transports: ['websocket'],
+        withCredentials: true,
+      });
+
+      const RECEIVER_USER_ID = 2; // 👈 set to the user who will receive the request
+
+      socket.on('connect', () => {
+        log('✅ connected: ' + socket.id);
+        // register this browser as a specific user
+        socket.emit('registerUser', RECEIVER_USER_ID);
+        log('↪️ sent registerUser(' + RECEIVER_USER_ID + ')');
+      });
+
+      socket.on('partnerRequestNotification', (payload) => {
+        log('📩 partnerRequestNotification: ' + JSON.stringify(payload));
+      });
+
+      socket.on('disconnect', () => log('❌ disconnected'));
+      socket.on('connect_error', (e) => log('⚠️ connect_error: ' + e.message));
+    </script>
+  </body>
+</html>
