@@ -94,11 +94,9 @@ See `.env.example` for a complete list.
   - `APP_BASE_URL=http://localhost:3000` (used in emails)
   - `FRONTEND_URL=http://localhost:5173` (OAuth callback and CORS for WS)
 - Database (MySQL)
-  - `DB_HOST=localhost`
-  - `DB_PORT=3306`
-  - `DB_USERNAME=root`
-  - `DB_PASSWORD=...`
-  - `DB_NAME=real_estate`
+  - Prefer single `DATABASE_URL` (mysql://user:pass@host:3306/dbname) on cloud providers
+  - Or use fields: `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `DB_NAME`
+  - `DB_SSL=true` if your provider requires TLS (will set `rejectUnauthorized: false`)
 - Auth
   - `JWT_SECRET=supersecret`
   - Google OAuth: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_CALLBACK_URL`

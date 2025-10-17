@@ -29,6 +29,12 @@ import { RentContactModule } from './Realestate/property-feature-and-contact/pro
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
+      // Prefer single URL when provided (e.g., Render, PlanetScale, etc.)
+      // Format: mysql://USER:PASSWORD@HOST:PORT/DB_NAME
+      url:
+        process.env.DATABASE_URL ||
+        process.env.DB_URL ||
+        undefined,
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT || '3306'),
       username: process.env.DB_USERNAME || 'root',
@@ -36,6 +42,10 @@ import { RentContactModule } from './Realestate/property-feature-and-contact/pro
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true, // ⚠️ Use false in production
+      ssl:
+        process.env.DB_SSL === 'true'
+          ? { rejectUnauthorized: false }
+          : undefined,
     }),
     AuthModule, 
     ScheduleModule.forRoot(), ProfileModule, UserProfileModule, CompanyDetailsModule, PaymentmethodModule, TaxInformationModule, NotificationPreferenceModule, PartnersModule, NotificationsModule, CompanyFollowersModule, OpportunitiesModule, PropertyModule, PropertyTypeModule, PropertyLocationModule, PropertyMediaModule, PropertySaleDetailsModule, PropertyNewBuildingDetailsModule, PropertyRentDetailsModule, PropertyNewBuildingFeaturesModule, PropertyResaleFeaturesModule, RentContactModule, 

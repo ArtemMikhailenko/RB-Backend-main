@@ -93,7 +93,9 @@
   - `APP_BASE_URL=http://localhost:3000`
   - `FRONTEND_URL=http://localhost:5173`
 - База (MySQL)
-  - `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `DB_NAME`
+  - На облачных провайдерах используйте `DATABASE_URL` (mysql://user:pass@host:3306/dbname)
+  - Либо поля: `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `DB_NAME`
+  - Если требуется TLS/SSL — `DB_SSL=true` (включит ssl c `rejectUnauthorized: false`)
 - Auth
   - `JWT_SECRET`
   - Google: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_CALLBACK_URL`
