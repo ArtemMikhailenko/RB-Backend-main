@@ -10,6 +10,7 @@ import { CreatePropertyMediaWithFilesDto } from './dto/create-property-media-wit
 import { MediaType } from './dto/media-type.enum';
 import { UpdatePropertyMediaDto } from './dto/update-property-media.dto';
 import { Property } from 'src/Realestate/property/entities/property.entity';
+import type { Express } from 'express';
 
 @Injectable()
 export class PropertyMediaService {

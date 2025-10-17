@@ -19,6 +19,7 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { UpdatePropertyMediaDto } from './dto/update-property-media.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import type { Express } from 'express';
 
 @Controller('property-media')
 export class PropertyMediaController {
