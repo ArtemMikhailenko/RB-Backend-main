@@ -28,9 +28,9 @@ import { RentContactModule } from './Realestate/property-feature-and-contact/pro
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      // Prefer single URL when provided (e.g., Render, PlanetScale, etc.)
-      // Format: mysql://USER:PASSWORD@HOST:PORT/DB_NAME
+      type: process.env.DATABASE_URL?.startsWith('postgres') ? 'postgres' : 'mysql',
+      // Prefer single URL when provided (e.g., Render, Railway, PlanetScale, etc.)
+      // Format: postgresql://USER:PASSWORD@HOST:PORT/DB_NAME or mysql://...
       url:
         process.env.DATABASE_URL ||
         process.env.DB_URL ||

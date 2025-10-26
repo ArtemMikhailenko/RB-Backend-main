@@ -1,0 +1,61 @@
+=== СКОПІЮЙТЕ ЦІ ЗМІННІ НА RENDER ===
+
+Render Dashboard → rb-backend-main → Settings → Environment → Add Environment Variable
+
+---
+
+1. DATABASE_URL
+postgresql://postgres:YuoVJABFaDViOwhuPMOsKFIeXfLECYCU@yamanote.proxy.rlwy.net:59768/railway
+
+---
+
+2. DB_SSL
+true
+
+---
+
+3. PORT
+3000
+
+---
+
+4. APP_BASE_URL
+https://rb-backend-main.onrender.com
+
+---
+
+5. FRONTEND_URL
+https://rb-frontend-main.vercel.app
+
+---
+
+6. JWT_SECRET
+⚠️ ЗГЕНЕРУЙТЕ ЗАРАЗ У ТЕРМІНАЛІ:
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+Потім вставте результат сюди
+
+---
+
+7. MAIL_USER
+⚠️ ВАШ GMAIL (наприклад: yourname@gmail.com)
+
+---
+
+8. MAIL_PASS
+⚠️ СТВОРІТЬ APP PASSWORD:
+1. Відкрийте: https://myaccount.google.com/apppasswords
+2. Створіть новий App Password для "Backend"
+3. Скопіюйте 16 символів (без пробілів)
+4. Вставте сюди
+
+---
+
+=== ПІСЛЯ ДОДАВАННЯ ВСІХ 8 ЗМІННИХ ===
+
+1. Натисніть Save Changes
+2. Render автоматично передеплоїть
+3. Через 2-3 хвилини перевірте: https://rb-backend-main.onrender.com
+4. Має показати: "Hello World!"
+
+=== ГОТОВО! ===
