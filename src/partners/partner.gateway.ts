@@ -9,9 +9,15 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
+const PARTNER_ORIGINS = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+
 @WebSocketGateway({
   cors: {
-    origin: process.env.FRONTEND_URL || '*',
+    origin: PARTNER_ORIGINS.length ? PARTNER_ORIGINS : '*',
+    credentials: true,
   },
 })
 export class PartnerGateway implements OnGatewayConnection, OnGatewayDisconnect {

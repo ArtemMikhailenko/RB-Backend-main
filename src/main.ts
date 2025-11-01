@@ -10,10 +10,27 @@ import { join } from 'path';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // ✅ Enable CORS for frontend
+  // ✅ Enable strict CORS for frontend (supports multiple origins via FRONTEND_URL="https://a.com,https://b.com")
+  const rawOrigins = process.env.FRONTEND_URL || '';
+  const allowList = rawOrigins
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  // Helpful locals for dev
+  const devOrigins = ['http://localhost:5173', 'http://localhost:3000'];
+  for (const o of devOrigins) if (!allowList.includes(o)) allowList.push(o);
+
   app.enableCors({
-    origin: '*',
+    origin: (origin, callback) => {
+      // allow non-browser or same-origin requests (e.g., curl/Postman where origin is undefined)
+      if (!origin) return callback(null, true);
+      if (allowList.includes(origin)) return callback(null, true);
+      return callback(new Error(`CORS blocked for origin: ${origin}`), false);
+    },
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization, Accept, X-Requested-With',
     credentials: true,
+    optionsSuccessStatus: 204,
   });
 
   // ✅ Serve static files (uploads, email-assets)

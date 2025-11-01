@@ -12,9 +12,14 @@ import { JwtService } from '@nestjs/jwt';
 import { ChatPresenceService } from './presence.service';
 import { ChatService } from './chat.service';
 
+const CHAT_ORIGINS = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+
 @WebSocketGateway({
   cors: {
-    origin: process.env.FRONTEND_URL || '*',
+    origin: CHAT_ORIGINS.length ? CHAT_ORIGINS : '*',
     credentials: true,
   },
 })
