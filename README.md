@@ -28,6 +28,7 @@ Real Estate Backend built with [NestJS](https://nestjs.com), TypeORM (MySQL), JW
 • Architecture: see `docs/ARCHITECTURE.md`
 
 • Frontend integration guide: see `docs/INTEGRATION.md`
+• Chat API (RU): see `docs/CHAT_API.ru.md`
 
 ## Project setup
 

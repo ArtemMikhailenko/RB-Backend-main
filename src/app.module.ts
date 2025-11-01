@@ -23,6 +23,7 @@ import { PropertyRentDetailsModule } from './Realestate/property-details/propert
 import { PropertyNewBuildingFeaturesModule } from './Realestate/property-feature-and-contact/property-new-building-features/property-new-building-features.module';
 import { PropertyResaleFeaturesModule } from './Realestate/property-feature-and-contact/property-resale-features/property-resale-features.module';
 import { RentContactModule } from './Realestate/property-feature-and-contact/property-rent-contact/property-rent-contact.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { RentContactModule } from './Realestate/property-feature-and-contact/pro
     }),
     AuthModule, 
     ScheduleModule.forRoot(), ProfileModule, UserProfileModule, CompanyDetailsModule, PaymentmethodModule, TaxInformationModule, NotificationPreferenceModule, PartnersModule, NotificationsModule, CompanyFollowersModule, OpportunitiesModule, PropertyModule, PropertyTypeModule, PropertyLocationModule, PropertyMediaModule, PropertySaleDetailsModule, PropertyNewBuildingDetailsModule, PropertyRentDetailsModule, PropertyNewBuildingFeaturesModule, PropertyResaleFeaturesModule, RentContactModule, 
+    ChatModule,
   ],
   providers: [],
   controllers: [],

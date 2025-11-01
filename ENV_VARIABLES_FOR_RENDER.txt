@@ -32,7 +32,7 @@ https://rb-frontend-main.vercel.app
 6. JWT_SECRET
 ⚠️ ЗГЕНЕРУЙТЕ ЗАРАЗ У ТЕРМІНАЛІ:
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-
+62ff2e3dd1f13374837dd32ac1436f516b68796fd51b4458945e5018deec43ed
 Потім вставте результат сюди
 
 ---
